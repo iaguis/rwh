@@ -61,7 +61,7 @@ cycle' :: [a] -> [a]
 cycle' xs = foldr (:) (cycle' xs) xs
 
 words' :: String -> [String]
-words' xs = delete "" $ nub $ foldr step [] xs
+words' xs = deleteEmpty $ foldr step [] xs
   where
     step x []
       | isSpace x = [[]]
@@ -69,6 +69,11 @@ words' xs = delete "" $ nub $ foldr step [] xs
     step x (y:ys)
       | isSpace x = []:(y:ys)
       | otherwise = (x:y):ys
+
+    deleteEmpty [] = []
+    deleteEmpty (x:xs)
+      | x==""     = deleteEmpty xs
+      | otherwise = x:deleteEmpty xs
 
 unlines' :: [String] -> String
 unlines' xs = foldr step [] xs
