@@ -1,4 +1,6 @@
 import Data.List
+import Test.QuickCheck
+import Control.Monad
 
 length' :: [a] -> Int
 length' [] = 0
@@ -30,4 +32,3 @@ data Tree a = Node a (Tree a) (Tree a)
 treeHeight :: Tree a -> Int
 treeHeight Empty = 0
 treeHeight (Node _ lt rt) = 1 + max (treeHeight lt) (treeHeight rt)
-
